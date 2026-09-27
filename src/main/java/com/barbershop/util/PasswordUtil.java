@@ -4,22 +4,11 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * Hashes passwords with SHA-256 so that the {@code users} table never stores plain text.
- *
- * <p>A fixed application salt keeps the stored hashes from being trivially reversible through
- * a rainbow table. This is proportionate for a small desktop project; a production system would
- * use a per-user salt and a slow KDF such as bcrypt.</p>
- */
 public final class PasswordUtil {
-
     private static final String SALT = "barbershop-dsa-project";
 
-    private PasswordUtil() {
-        // utility class
-    }
+    private PasswordUtil() { }
 
-    /** Returns the hex-encoded SHA-256 hash of {@code salt + password}. */
     public static String hash(String password) {
         if (password == null) {
             password = "";
@@ -38,7 +27,6 @@ public final class PasswordUtil {
         }
     }
 
-    /** Constant-time-ish comparison used when checking a login. */
     public static boolean matches(String plainPassword, String storedHash) {
         if (storedHash == null) {
             return false;

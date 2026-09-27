@@ -2,14 +2,7 @@ package com.barbershop.model;
 
 import java.util.Objects;
 
-/**
- * A registered barbershop customer.
- *
- * <p>Implements {@link Comparable} by name so that customer lists can be sorted with the
- * project's own merge sort and then searched with binary search.</p>
- */
 public class Customer implements Comparable<Customer> {
-
     private int customerId;
     private String name;
     private String phone;
@@ -62,7 +55,6 @@ public class Customer implements Comparable<Customer> {
         this.email = email;
     }
 
-    /** Customer names are compared case-insensitively, ignoring surrounding spaces. */
     @Override
     public int compareTo(Customer other) {
         return String.CASE_INSENSITIVE_ORDER.compare(safe(name), safe(other.name));
@@ -92,7 +84,6 @@ public class Customer implements Comparable<Customer> {
         return customerId != 0 ? Integer.hashCode(customerId) : safe(name).toLowerCase().hashCode();
     }
 
-    /** Table views show the customer name directly. */
     @Override
     public String toString() {
         return name;

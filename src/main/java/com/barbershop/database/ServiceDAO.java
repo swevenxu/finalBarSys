@@ -11,11 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Data access for the {@code services} table.
- */
 public class ServiceDAO {
-
     public List<Service> findAll() {
         String sql = "SELECT service_id, name, price, duration FROM services ORDER BY name COLLATE NOCASE";
         List<Service> services = new ArrayList<>();

@@ -6,17 +6,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-/**
- * A hand-written LIFO stack backed by a growable array.
- *
- * <p>DSA #6 of the project. Completed payments are pushed here as they happen, which gives the
- * Transactions screen its "recent transactions" feed (newest on top) and powers
- * <em>Undo last payment</em>.</p>
- *
- * @param <T> element type
- */
 public class MyStack<T> {
-
     private static final int INITIAL_CAPACITY = 16;
 
     private Object[] elements;
@@ -26,7 +16,6 @@ public class MyStack<T> {
         this.elements = new Object[INITIAL_CAPACITY];
     }
 
-    /** Pushes an element onto the top of the stack. Amortised O(1). */
     public void push(T item) {
         Objects.requireNonNull(item, "item");
         if (size == elements.length) {
@@ -35,11 +24,6 @@ public class MyStack<T> {
         elements[size++] = item;
     }
 
-    /**
-     * Removes and returns the element on top of the stack. Amortised O(1).
-     *
-     * @throws NoSuchElementException when the stack is empty
-     */
     @SuppressWarnings("unchecked")
     public T pop() {
         if (size == 0) {
@@ -50,11 +34,6 @@ public class MyStack<T> {
         return item;
     }
 
-    /**
-     * Returns the top element without removing it. O(1).
-     *
-     * @throws NoSuchElementException when the stack is empty
-     */
     @SuppressWarnings("unchecked")
     public T peek() {
         if (size == 0) {
@@ -63,7 +42,6 @@ public class MyStack<T> {
         return (T) elements[size - 1];
     }
 
-    /** Returns the top element, or {@code null} when the stack is empty. */
     public T peekOrNull() {
         return size == 0 ? null : peek();
     }
@@ -83,10 +61,6 @@ public class MyStack<T> {
         size = 0;
     }
 
-    /**
-     * Snapshot with the top element first, which is the order the UI wants to display.
-     * O(n).
-     */
     @SuppressWarnings("unchecked")
     public List<T> toList() {
         List<T> items = new ArrayList<>(size);
@@ -96,7 +70,6 @@ public class MyStack<T> {
         return items;
     }
 
-    /** Oldest first. The reverse of {@link #toList()}. */
     @SuppressWarnings("unchecked")
     public List<T> toListBottomFirst() {
         List<T> items = new ArrayList<>(size);
@@ -106,7 +79,6 @@ public class MyStack<T> {
         return items;
     }
 
-    /** Replaces the current contents, used when reloading from the database. */
     public void loadFrom(Iterable<? extends T> items) {
         clear();
         for (T item : items) {

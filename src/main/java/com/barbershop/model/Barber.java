@@ -1,13 +1,6 @@
 package com.barbershop.model;
 
-/**
- * A barber employed by the shop.
- *
- * <p>Status is stored as one of {@link #AVAILABLE}, {@link #BUSY} or {@link #OFF_DUTY} so the
- * Queue screen can show who is free to take the next walk-in.</p>
- */
 public class Barber implements Comparable<Barber> {
-
     public static final String AVAILABLE = "Available";
     public static final String BUSY = "Busy";
     public static final String OFF_DUTY = "Off Duty";
@@ -70,7 +63,6 @@ public class Barber implements Comparable<Barber> {
         return AVAILABLE.equalsIgnoreCase(status);
     }
 
-    /** Used to load combo boxes. */
     @Override
     public String toString() {
         return name;

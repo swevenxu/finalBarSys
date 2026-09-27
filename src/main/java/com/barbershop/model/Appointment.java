@@ -5,15 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
-/**
- * A booked appointment.
- *
- * <p>The first five fields mirror the {@code appointments} table. The remaining fields are
- * denormalised display values filled in by the DAO joins so the JavaFX table does not have to
- * perform extra lookups per row.</p>
- */
 public class Appointment {
-
     public static final String BOOKED = "Booked";
     public static final String WAITING = "Waiting";
     public static final String IN_PROGRESS = "In Progress";
@@ -33,20 +25,17 @@ public class Appointment {
     private LocalTime appointmentTime;
     private String status;
 
-    // Display-only fields (populated from joined tables).
     private String customerName = "";
     private String barberName = "";
     private String serviceName = "";
     private double servicePrice;
 
-    /** Earliest appointment first; used by the priority queue on the dashboard. */
     public static final Comparator<Appointment> BY_DATE_TIME =
             Comparator.comparing(Appointment::getAppointmentDate,
                             Comparator.nullsLast(Comparator.naturalOrder()))
                     .thenComparing(Appointment::getAppointmentTime,
                             Comparator.nullsLast(Comparator.naturalOrder()));
 
-    /** Latest appointment first; used by the linked-list history view. */
     public static final Comparator<Appointment> BY_DATE_TIME_DESC = BY_DATE_TIME.reversed();
 
     public Appointment() {
@@ -157,17 +146,14 @@ public class Appointment {
         this.servicePrice = servicePrice;
     }
 
-    /** Convenience for the appointments table "Time" column. */
     public String getFormattedTime() {
         return appointmentTime == null ? "" : appointmentTime.format(TIME_FORMAT);
     }
 
-    /** Convenience for the appointments table "Date" column. */
     public String getFormattedDate() {
         return appointmentDate == null ? "" : appointmentDate.format(DATE_FORMAT);
     }
 
-    /** Combined date/time, used for "next up" ordering and for the ticket timestamp. */
     public java.time.LocalDateTime getDateTime() {
         if (appointmentDate == null || appointmentTime == null) {
             return null;

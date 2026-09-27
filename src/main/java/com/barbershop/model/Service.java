@@ -1,10 +1,6 @@
 package com.barbershop.model;
 
-/**
- * A service offered by the barbershop, for example "Haircut" at ₱150 for 30 minutes.
- */
 public class Service implements Comparable<Service> {
-
     private int serviceId;
     private String name;
     private double price;
@@ -57,7 +53,6 @@ public class Service implements Comparable<Service> {
         this.durationMinutes = durationMinutes;
     }
 
-    /** Combo boxes show the service name; tables build their own cell text. */
     @Override
     public String toString() {
         return name;

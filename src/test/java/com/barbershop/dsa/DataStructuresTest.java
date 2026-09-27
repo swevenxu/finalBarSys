@@ -19,13 +19,10 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/** Tests for the hand-written data structures in {@code com.barbershop.dsa}. */
 class DataStructuresTest {
-
     @Nested
     @DisplayName("MyQueue (FIFO walk-in line)")
     class QueueTests {
-
         @Test
         void servesCustomersInArrivalOrder() {
             MyQueue<String> queue = new MyQueue<>();
@@ -85,7 +82,6 @@ class DataStructuresTest {
     @Nested
     @DisplayName("MyPriorityQueue (min-heap)")
     class PriorityQueueTests {
-
         @Test
         void pollsSmallestFirst() {
             MyPriorityQueue<Integer> heap = new MyPriorityQueue<>(Comparator.naturalOrder());
@@ -140,7 +136,6 @@ class DataStructuresTest {
     @Nested
     @DisplayName("MyLinkedList (service history)")
     class LinkedListTests {
-
         @Test
         void supportsBothEndsAndTraversal() {
             MyLinkedList<String> list = new MyLinkedList<>();
@@ -189,7 +184,6 @@ class DataStructuresTest {
     @Nested
     @DisplayName("MyStack (recent transactions / undo)")
     class StackTests {
-
         @Test
         void popsTheMostRecentFirst() {
             MyStack<Integer> stack = new MyStack<>();

@@ -18,14 +18,7 @@ import javafx.stage.Stage;
 
 import java.util.Optional;
 
-/**
- * Handles signing in.
- *
- * <p>The typed password is hashed and compared against the stored hash by {@link UserDAO}, so
- * plain text passwords are never kept anywhere.</p>
- */
 public class LoginController {
-
     private static final String TITLE = "Barbershop Management System";
 
     @FXML
@@ -39,7 +32,6 @@ public class LoginController {
 
     private final UserDAO userDAO = new UserDAO();
 
-    /** Opens the login screen in {@code stage}. */
     public static void show(Stage stage) {
         Parent root = ViewLoader.load("LoginView.fxml");
         Scene scene = new Scene(root, 440, 580);

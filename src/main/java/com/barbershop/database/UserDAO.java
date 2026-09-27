@@ -9,16 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Optional;
 
-/**
- * Data access for the {@code users} table backing the login screen.
- */
 public class UserDAO {
-
-    /**
-     * Looks up an account by username (case-insensitive) and verifies the password hash.
-     *
-     * @return the user when the credentials are valid
-     */
     public Optional<User> authenticate(String username, String passwordHash) {
         String sql = "SELECT user_id, username, password_hash, full_name, role "
                 + "FROM users WHERE username = ? COLLATE NOCASE";

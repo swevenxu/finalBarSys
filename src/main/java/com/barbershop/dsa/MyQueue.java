@@ -6,20 +6,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-/**
- * A hand-written FIFO queue.
- *
- * <p>DSA #1 of the project. Walk-in customers are enqueued at the rear and served from the
- * front, so the first customer to arrive is the first to be served.</p>
- *
- * <p>Backed by singly linked nodes, giving O(1) {@link #enqueue(Object)} and
- * {@link #dequeue()} because a {@code rear} pointer is kept alongside {@code front}.</p>
- *
- * @param <T> element type
- */
 public class MyQueue<T> implements Iterable<T> {
-
-    /** One link in the chain. */
     private static final class Node<E> {
         private final E data;
         private Node<E> next;
@@ -33,11 +20,6 @@ public class MyQueue<T> implements Iterable<T> {
     private Node<T> rear;
     private int size;
 
-    /**
-     * Adds an element to the rear of the queue. O(1).
-     *
-     * @return {@code true} when the element was added
-     */
     public boolean enqueue(T item) {
         Objects.requireNonNull(item, "item");
         Node<T> node = new Node<>(item);
@@ -52,11 +34,6 @@ public class MyQueue<T> implements Iterable<T> {
         return true;
     }
 
-    /**
-     * Removes and returns the element at the front of the queue. O(1).
-     *
-     * @throws NoSuchElementException when the queue is empty
-     */
     public T dequeue() {
         if (front == null) {
             throw new NoSuchElementException("Cannot dequeue from an empty queue.");
@@ -70,11 +47,6 @@ public class MyQueue<T> implements Iterable<T> {
         return data;
     }
 
-    /**
-     * Returns the element at the front without removing it. O(1).
-     *
-     * @throws NoSuchElementException when the queue is empty
-     */
     public T peek() {
         if (front == null) {
             throw new NoSuchElementException("Cannot peek an empty queue.");
@@ -82,7 +54,6 @@ public class MyQueue<T> implements Iterable<T> {
         return front.data;
     }
 
-    /** Returns the front element, or {@code null} when the queue is empty. */
     public T peekOrNull() {
         return front == null ? null : front.data;
     }
@@ -101,12 +72,6 @@ public class MyQueue<T> implements Iterable<T> {
         size = 0;
     }
 
-    /**
-     * Removes the first occurrence of {@code item}. O(n) — needed when the receptionist
-     * cancels somebody who is not at the front of the line.
-     *
-     * @return {@code true} when an element was removed
-     */
     public boolean remove(T item) {
         Node<T> previous = null;
         Node<T> current = front;
@@ -129,7 +94,6 @@ public class MyQueue<T> implements Iterable<T> {
         return false;
     }
 
-    /** Removes and returns the element at position {@code index} (0 = front). O(n). */
     public T removeAt(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bounds for size " + size);
@@ -152,7 +116,6 @@ public class MyQueue<T> implements Iterable<T> {
         return current.data;
     }
 
-    /** Returns the element at position {@code index} (0 = front) without removing it. O(n). */
     public T get(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bounds for size " + size);
@@ -164,7 +127,6 @@ public class MyQueue<T> implements Iterable<T> {
         return current.data;
     }
 
-    /** Snapshot of the queue from front to rear. O(n). */
     public List<T> toList() {
         List<T> items = new ArrayList<>(size);
         for (Node<T> current = front; current != null; current = current.next) {
@@ -173,7 +135,6 @@ public class MyQueue<T> implements Iterable<T> {
         return items;
     }
 
-    /** Walks the queue from front to rear without modifying it. */
     @Override
     public Iterator<T> iterator() {
         return new Iterator<>() {

@@ -23,15 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Payment history and the recently-completed-transactions stack.
- *
- * <p>DSA #6 in the running system: every payment is pushed onto the project's own
- * {@link MyStack}, so the newest payment is always on top and "Undo last payment" is a
- * {@code peek()} followed by a {@code pop()}.</p>
- */
 public class TransactionController implements Refreshable {
-
     @FXML
     private Label totalRevenueValue;
 
@@ -68,7 +60,6 @@ public class TransactionController implements Refreshable {
     private final TransactionDAO transactionDAO = new TransactionDAO();
     private final AppointmentDAO appointmentDAO = new AppointmentDAO();
 
-    /** Completed payments held in LIFO order; the newest payment is on top. */
     private final MyStack<Transaction> recentPayments = new MyStack<>();
 
     @FXML
@@ -108,10 +99,6 @@ public class TransactionController implements Refreshable {
         }
     }
 
-    /**
-     * Pushes the payments onto the stack oldest first, so the newest payment ends up on top of
-     * the stack where the UI shows it.
-     */
     private void rebuildStack(List<Transaction> newestFirst) {
         recentPayments.clear();
         for (int i = newestFirst.size() - 1; i >= 0; i--) {
@@ -120,7 +107,7 @@ public class TransactionController implements Refreshable {
 
         List<String> rows = new ArrayList<>();
         int position = 1;
-        // toList() returns the stack top first, which is the order we display it in.
+
         for (Transaction transaction : recentPayments.toList()) {
             rows.add(position++ + ".  " + Money.format(transaction.getAmount())
                     + "  •  " + transaction.getCustomerName()
@@ -141,7 +128,6 @@ public class TransactionController implements Refreshable {
         refresh();
     }
 
-    /** Pops the most recent payment off the stack and deletes it. */
     @FXML
     private void handleUndo() {
         Transaction top = recentPayments.peekOrNull();
@@ -170,10 +156,6 @@ public class TransactionController implements Refreshable {
         }
     }
 
-    /**
-     * Records a payment for a completed appointment that has none yet — for example a booking
-     * that was served from the Appointments screen rather than through the walk-in queue.
-     */
     @FXML
     private void handleRecordPayment() {
         try {

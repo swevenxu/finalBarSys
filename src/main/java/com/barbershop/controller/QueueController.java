@@ -30,16 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Walk-in queue screen.
- *
- * <p>This is where the project's own {@link QueueService} — built on the hand-written
- * {@code MyQueue} — drives the user interface. Adding a walk-in calls {@code enqueue()} at the
- * rear of the line; serving a customer calls {@code dequeue()} at the front, which records the
- * completed appointment and its payment.</p>
- */
 public class QueueController implements Refreshable {
-
     @FXML
     private Label currentCustomer;
 
@@ -97,11 +88,6 @@ public class QueueController implements Refreshable {
         refreshQueueView();
     }
 
-    // ------------------------------------------------------------------
-    // Queue display (DSA #1)
-    // ------------------------------------------------------------------
-
-    /** Redraws the front-of-line card, the waiting list and the queue structure diagram. */
     private void refreshQueueView() {
         QueueTicket next = queueService.peekNext();
 
@@ -133,7 +119,6 @@ public class QueueController implements Refreshable {
         queueStructure.setText(buildQueueDiagram());
     }
 
-    /** Builds the FRONT -> ... -> REAR string from the live queue contents. */
     private String buildQueueDiagram() {
         List<QueueTicket> tickets = queueService.snapshot();
         if (tickets.isEmpty()) {
@@ -146,10 +131,6 @@ public class QueueController implements Refreshable {
         }
         return diagram.append(" -> REAR").toString();
     }
-
-    // ------------------------------------------------------------------
-    // Queue operations
-    // ------------------------------------------------------------------
 
     @FXML
     private void handleAddWalkIn() {
@@ -184,7 +165,6 @@ public class QueueController implements Refreshable {
         }
     }
 
-    /** Uses the selected customer, or registers the name typed in the optional text field. */
     private Customer resolveCustomer() {
         String newName = newCustomerField.getText() == null ? "" : newCustomerField.getText().trim();
 
@@ -203,10 +183,6 @@ public class QueueController implements Refreshable {
         return selected;
     }
 
-    /**
-     * Dequeues the customer at the front, records the completed appointment and takes the
-     * payment — the "serve then pay" step of the system workflow.
-     */
     @FXML
     private void handleServe() {
         QueueTicket ticket = queueService.peekNext();
@@ -235,7 +211,6 @@ public class QueueController implements Refreshable {
         }
 
         try {
-            // dequeue() removes the FRONT element and shifts the rest of the line forward.
             QueueTicket served = queueService.serveNext();
 
             Appointment appointment = new Appointment(

@@ -1,10 +1,6 @@
 package com.barbershop.model;
 
-/**
- * A system login account.
- */
 public class User {
-
     public static final String ROLE_ADMIN = "Admin";
     public static final String ROLE_STAFF = "Staff";
 

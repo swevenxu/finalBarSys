@@ -26,20 +26,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * Customer management.
- *
- * <p>Two DSA features come together here:</p>
- * <ul>
- *   <li><strong>Searching</strong> — the customer list is sorted by name with the project's
- *       merge sort, an exact name is looked up with {@code binarySearch} (O(log n)) and partial
- *       matches are found with a {@code linearSearch} style scan (O(n)).</li>
- *   <li><strong>Linked list</strong> — {@code View history} chains the customer's appointments
- *       into a {@link MyLinkedList}, newest at the head, and walks it to fill the list.</li>
- * </ul>
- */
 public class CustomerController implements Refreshable {
-
     @FXML
     private TextField searchField;
 
@@ -88,7 +75,6 @@ public class CustomerController implements Refreshable {
     private final CustomerDAO customerDAO = new CustomerDAO();
     private final AppointmentDAO appointmentDAO = new AppointmentDAO();
 
-    /** The customer currently loaded into the form, or {@code null} when adding a new one. */
     private Customer selectedCustomer;
 
     @FXML
@@ -114,10 +100,6 @@ public class CustomerController implements Refreshable {
         applySearch();
     }
 
-    // ------------------------------------------------------------------
-    // Searching (DSA #4)
-    // ------------------------------------------------------------------
-
     @FXML
     private void handleSearch() {
         applySearch();
@@ -129,10 +111,6 @@ public class CustomerController implements Refreshable {
         applySearch();
     }
 
-    /**
-     * Sorts every customer by name with merge sort, then either lists them all or searches:
-     * binary search for an exact name match, linear scan for partial matches.
-     */
     private void applySearch() {
         try {
             String query = searchField.getText() == null ? "" : searchField.getText().trim();
@@ -159,11 +137,9 @@ public class CustomerController implements Refreshable {
     private List<Customer> searchCustomers(List<Customer> sortedByName, String query) {
         String needle = query.toLowerCase();
 
-        // Binary search needs an exact key, so build a probe customer from the typed name.
         Customer probe = new Customer(query, "", "");
         int exactIndex = SearchAlgorithms.binarySearch(sortedByName, probe);
 
-        // Linear scan for anything containing the query, or a phone number that matches.
         List<Customer> matches = new ArrayList<>();
         for (Customer customer : sortedByName) {
             boolean nameContains = customer.getName() != null
@@ -185,7 +161,6 @@ public class CustomerController implements Refreshable {
         return matches;
     }
 
-    /** Wraps customers with their appointment count and total spending for the table. */
     private void showRows(List<Customer> customers) {
         List<CustomerSummary> rows = new ArrayList<>(customers.size());
         for (Customer customer : customers) {
@@ -200,10 +175,6 @@ public class CustomerController implements Refreshable {
         customerTable.setPlaceholder(new Label(
                 customers.isEmpty() ? "No customers match your search." : "No customers yet."));
     }
-
-    // ------------------------------------------------------------------
-    // Add / edit / delete
-    // ------------------------------------------------------------------
 
     @FXML
     private void handleSave() {
@@ -303,10 +274,6 @@ public class CustomerController implements Refreshable {
         showHistory(customer);
     }
 
-    // ------------------------------------------------------------------
-    // Linked-list history (DSA #5)
-    // ------------------------------------------------------------------
-
     @FXML
     private void handleViewHistory() {
         if (selectedCustomer == null) {
@@ -316,16 +283,12 @@ public class CustomerController implements Refreshable {
         showHistory(selectedCustomer);
     }
 
-    /**
-     * Chains the customer's appointments into a {@link MyLinkedList} and walks the nodes from
-     * the head to build the display.
-     */
     private void showHistory(Customer customer) {
         try {
             List<Appointment> history = appointmentDAO.findByCustomer(customer.getCustomerId());
 
             MyLinkedList<Appointment> chain = new MyLinkedList<>();
-            // The query already returns newest first, so appending keeps the newest at the head.
+
             for (Appointment appointment : history) {
                 chain.addLast(appointment);
             }

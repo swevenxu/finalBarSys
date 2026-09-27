@@ -3,11 +3,7 @@ package com.barbershop.model;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * A recorded payment for a served customer.
- */
 public class Transaction {
-
     public static final String CASH = "Cash";
     public static final String CARD = "Card";
     public static final String GCASH = "GCash";
@@ -23,7 +19,6 @@ public class Transaction {
     private String paymentMethod;
     private LocalDateTime transactionDate;
 
-    // Display-only fields filled in by DAO joins.
     private String customerName = "";
     private String serviceName = "";
 

@@ -8,30 +8,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * Creates the SQLite schema and the shop's starting data.
- *
- * <p>Everything here is idempotent ({@code CREATE TABLE IF NOT EXISTS} plus count checks), so it
- * is safe to run on every launch. A fresh install starts clean: only the default admin login is
- * created; barbers, services and customers are entered by the shop through the UI.</p>
- */
 public final class DatabaseInitializer {
-
-    /** Login created on first run when the {@code users} table is empty. */
     public static final String DEFAULT_USERNAME = "admin";
     public static final String DEFAULT_PASSWORD = "admin";
 
-    private DatabaseInitializer() {
-        // utility class
-    }
+    private DatabaseInitializer() { }
 
-    /** Creates the tables (if needed) and the default admin login on first launch. */
     public static void initialize() {
         createSchema();
         seedUsers();
     }
 
-    /** Drops and recreates every table. Used by the unit tests. */
     public static void reset() {
         String[] drops = {
                 "DROP TABLE IF EXISTS transactions",

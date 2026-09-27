@@ -11,14 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-/**
- * The application shell: header, sidebar navigation and the content area.
- *
- * <p>Each navigation button loads a screen's FXML into the content area and then asks its
- * controller to refresh, so switching screens always shows up-to-date data.</p>
- */
 public class MainController {
-
     @FXML
     private StackPane contentArea;
 
@@ -28,7 +21,6 @@ public class MainController {
     @FXML
     private Label pageTitle;
 
-    /** Opens the main window in {@code stage}. */
     public static void show(Stage stage) {
         Parent root = ViewLoader.load("MainView.fxml");
         Scene scene = new Scene(root, 1180, 720);
@@ -96,12 +88,6 @@ public class MainController {
         LoginController.show((Stage) contentArea.getScene().getWindow());
     }
 
-    /**
-     * Replaces the content area with a freshly loaded view and refreshes it.
-     *
-     * <p>Views are reloaded rather than cached so that every visit reflects the latest database
-     * contents.</p>
-     */
     private void setContent(String fxmlFile, String title) {
         try {
             ViewLoader.LoadedView view = ViewLoader.loadWithController(fxmlFile);

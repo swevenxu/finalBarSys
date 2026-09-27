@@ -2,11 +2,7 @@ package com.barbershop.model;
 
 import com.barbershop.util.Money;
 
-/**
- * A customer together with the statistics shown on the Customers screen.
- */
 public class CustomerSummary {
-
     private final Customer customer;
     private final int appointmentCount;
     private final double totalSpent;

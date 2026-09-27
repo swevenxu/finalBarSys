@@ -3,13 +3,7 @@ package com.barbershop.controller;
 import com.barbershop.model.Appointment;
 import javafx.scene.control.TableCell;
 
-/**
- * Colour-codes the status column of appointment tables.
- *
- * <p>CSS classes such as {@code status-done} are defined in {@code style.css}.</p>
- */
 public class StatusCell extends TableCell<Appointment, String> {
-
     @Override
     protected void updateItem(String status, boolean empty) {
         super.updateItem(status, empty);

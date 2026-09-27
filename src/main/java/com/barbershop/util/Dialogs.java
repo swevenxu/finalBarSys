@@ -6,14 +6,8 @@ import javafx.scene.control.TextArea;
 
 import java.util.Optional;
 
-/**
- * Thin wrappers around JavaFX {@link Alert} so controllers do not repeat boilerplate.
- */
 public final class Dialogs {
-
-    private Dialogs() {
-        // utility class
-    }
+    private Dialogs() { }
 
     public static void info(String title, String message) {
         show(Alert.AlertType.INFORMATION, title, message, null);
@@ -27,12 +21,10 @@ public final class Dialogs {
         show(Alert.AlertType.ERROR, title, message, null);
     }
 
-    /** Shows an error dialog including the exception details in an expandable area. */
     public static void error(String title, String message, Throwable cause) {
         show(Alert.AlertType.ERROR, title, message, cause);
     }
 
-    /** Yes/No confirmation. Returns {@code true} when the user confirms. */
     public static boolean confirm(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message, ButtonType.YES, ButtonType.NO);
         alert.setTitle(title);

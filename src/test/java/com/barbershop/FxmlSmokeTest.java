@@ -20,15 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-/**
- * Loads every screen's FXML file through the real {@link ViewLoader}.
- *
- * <p>This catches the mistakes that only show up when FXML is parsed — a missing {@code fx:id},
- * a handler name that no longer exists on the controller, or a controller that throws from
- * {@code initialize()}.</p>
- */
 class FxmlSmokeTest {
-
     private static final List<String> VIEWS = List.of(
             "LoginView.fxml",
             "MainView.fxml",
@@ -45,14 +37,12 @@ class FxmlSmokeTest {
         DatabaseConnection.setUrl("jdbc:sqlite:target/test-fxml.db");
         DatabaseInitializer.reset();
 
-        // MainView greets the signed-in user, so put somebody in the session first.
         User user = new User("admin", "hash", "Shop Administrator", User.ROLE_ADMIN);
         Session.login(user);
 
         startJavaFxToolkit();
     }
 
-    /** Boots the JavaFX toolkit once so scene graph nodes can be created. */
     private static void startJavaFxToolkit() throws Exception {
         CountDownLatch started = new CountDownLatch(1);
         try {
@@ -83,10 +73,6 @@ class FxmlSmokeTest {
                 "style.css should be packaged in src/main/resources/css");
     }
 
-    /**
-     * Runs {@code action} on the JavaFX application thread and re-throws anything it throws on
-     * the calling thread, so a failure fails the test rather than being swallowed.
-     */
     private static void runOnFxThread(Runnable action) {
         CountDownLatch done = new CountDownLatch(1);
         AtomicReference<Throwable> failure = new AtomicReference<>();

@@ -14,11 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-/**
- * Barber management.
- */
 public class BarberController implements Refreshable {
-
     @FXML
     private TableView<Barber> barberTable;
 

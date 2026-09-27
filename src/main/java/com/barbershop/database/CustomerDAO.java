@@ -11,12 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Data access for the {@code customers} table.
- */
 public class CustomerDAO {
-
-    /** Returns every customer, ordered by name. */
     public List<Customer> findAll() {
         String sql = "SELECT customer_id, name, phone, email FROM customers ORDER BY name COLLATE NOCASE";
         List<Customer> customers = new ArrayList<>();
@@ -45,7 +40,6 @@ public class CustomerDAO {
         }
     }
 
-    /** Inserts a new customer and returns the generated id. */
     public int insert(Customer customer) {
         String sql = "INSERT INTO customers (name, phone, email) VALUES (?, ?, ?)";
         try (Connection connection = DatabaseConnection.getConnection();
@@ -67,7 +61,6 @@ public class CustomerDAO {
         }
     }
 
-    /** Updates an existing customer. Returns {@code false} when the id does not exist. */
     public boolean update(Customer customer) {
         String sql = "UPDATE customers SET name = ?, phone = ?, email = ? WHERE customer_id = ?";
         try (Connection connection = DatabaseConnection.getConnection();
@@ -82,10 +75,6 @@ public class CustomerDAO {
         }
     }
 
-    /**
-     * Deletes a customer together with their appointments and those appointments' transactions,
-     * because the foreign keys are declared as restrictive.
-     */
     public boolean delete(int customerId) {
         String deleteTransactions = """
                 DELETE FROM transactions WHERE appointment_id IN
@@ -121,7 +110,6 @@ public class CustomerDAO {
         }
     }
 
-    /** Number of appointments (any status) belonging to a customer. */
     public int countAppointments(int customerId) {
         String sql = "SELECT COUNT(*) FROM appointments WHERE customer_id = ?";
         try (Connection connection = DatabaseConnection.getConnection();
@@ -135,7 +123,6 @@ public class CustomerDAO {
         }
     }
 
-    /** Total money spent by a customer across all recorded payments. */
     public double totalSpent(int customerId) {
         String sql = """
                 SELECT COALESCE(SUM(t.amount), 0)
@@ -154,7 +141,6 @@ public class CustomerDAO {
         }
     }
 
-    /** Returns {@code true} when another customer already uses this phone number. */
     public boolean phoneExists(String phone, int excludingCustomerId) {
         String sql = "SELECT COUNT(*) FROM customers WHERE phone = ? AND customer_id <> ?";
         try (Connection connection = DatabaseConnection.getConnection();

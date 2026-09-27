@@ -2,16 +2,10 @@ package com.barbershop.util;
 
 import com.barbershop.model.User;
 
-/**
- * Keeps track of who is logged in for the duration of the session.
- */
 public final class Session {
-
     private static User currentUser;
 
-    private Session() {
-        // utility class
-    }
+    private Session() { }
 
     public static User getCurrentUser() {
         return currentUser;

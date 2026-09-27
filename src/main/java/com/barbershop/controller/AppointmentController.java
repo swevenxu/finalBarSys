@@ -31,20 +31,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
-/**
- * Appointment booking and management.
- *
- * <p>Sorting is the visible DSA here (DSA #3): the table is ordered with the project's own
- * {@link SortAlgorithms#mergeSort} rather than the TableView's built-in column sort, so the
- * sort can be explained and timed as an algorithmic step. The sorts available match the project
- * plan: appointment time, customer name, barber, service and price.</p>
- */
 public class AppointmentController implements Refreshable {
-
     private static final String ASCENDING = "Ascending";
     private static final String DESCENDING = "Descending";
 
-    /** The sortable keys shown in the "Sort by" combo box. */
     private enum SortField {
         TIME("Appointment time",
                 Comparator.comparing(Appointment::getDateTime,
@@ -134,10 +124,8 @@ public class AppointmentController implements Refreshable {
     private final BarberDAO barberDAO = new BarberDAO();
     private final ServiceDAO serviceDAO = new ServiceDAO();
 
-    /** Every appointment loaded from the database. */
     private List<Appointment> allAppointments = new ArrayList<>();
 
-    /** The currently selected appointment, or {@code null} when booking a new one. */
     private Appointment selectedAppointment;
 
     @FXML
@@ -194,10 +182,6 @@ public class AppointmentController implements Refreshable {
         renderTable();
     }
 
-    // ------------------------------------------------------------------
-    // Sorting and filtering (DSA #3)
-    // ------------------------------------------------------------------
-
     @FXML
     private void handleSort() {
         renderTable();
@@ -214,7 +198,6 @@ public class AppointmentController implements Refreshable {
         renderTable();
     }
 
-    /** Applies the text filter, then sorts what is left with the custom merge sort. */
     private void renderTable() {
         String filter = filterField.getText() == null ? "" : filterField.getText().trim().toLowerCase();
 
@@ -248,10 +231,6 @@ public class AppointmentController implements Refreshable {
                 || appointment.getServiceName().toLowerCase().contains(filter)
                 || appointment.getStatus().toLowerCase().contains(filter);
     }
-
-    // ------------------------------------------------------------------
-    // Booking CRUD
-    // ------------------------------------------------------------------
 
     @FXML
     private void handleSave() {
@@ -316,7 +295,6 @@ public class AppointmentController implements Refreshable {
         }
     }
 
-    /** Looks for an existing appointment for the same barber at the same date and time. */
     private Appointment findClash(int barberId, LocalDate date, LocalTime time, int excludingId) {
         for (Appointment appointment : allAppointments) {
             if (appointment.getAppointmentId() == excludingId) {
@@ -401,7 +379,6 @@ public class AppointmentController implements Refreshable {
         formTitle.setText("EDIT APPOINTMENT");
     }
 
-    /** Selects the combo box entry whose id matches, using the supplied id accessor. */
     private <T> void selectById(ComboBox<T> combo, int id, ToIntFunction<T> idAccessor) {
         for (T item : combo.getItems()) {
             if (idAccessor.applyAsInt(item) == id) {

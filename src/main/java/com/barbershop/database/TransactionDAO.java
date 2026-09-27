@@ -14,11 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Data access for the {@code transactions} table.
- */
 public class TransactionDAO {
-
     private static final DateTimeFormatter STORED_FORMAT =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
@@ -32,7 +28,6 @@ public class TransactionDAO {
             JOIN services     s ON s.service_id     = a.service_id
             """;
 
-    /** Every payment, newest first. */
     public List<Transaction> findAllWithDetails() {
         String sql = SELECT_WITH_DETAILS + " ORDER BY t.transaction_date DESC, t.transaction_id DESC";
         List<Transaction> results = new ArrayList<>();
@@ -48,7 +43,6 @@ public class TransactionDAO {
         }
     }
 
-    /** The most recent {@code limit} payments, newest first. */
     public List<Transaction> findRecent(int limit) {
         String sql = SELECT_WITH_DETAILS + " ORDER BY t.transaction_date DESC, t.transaction_id DESC LIMIT ?";
         List<Transaction> results = new ArrayList<>();
@@ -79,7 +73,6 @@ public class TransactionDAO {
         }
     }
 
-    /** Whether a payment has already been recorded for this appointment. */
     public Optional<Transaction> findByAppointment(int appointmentId) {
         String sql = SELECT_WITH_DETAILS + " WHERE t.appointment_id = ? LIMIT 1";
         try (Connection connection = DatabaseConnection.getConnection();
@@ -129,7 +122,6 @@ public class TransactionDAO {
         }
     }
 
-    /** Today's revenue, used by the dashboard. */
     public double totalRevenueForDate(LocalDate date) {
         String sql = "SELECT COALESCE(SUM(amount), 0) FROM transactions WHERE DATE(transaction_date) = ?";
         try (Connection connection = DatabaseConnection.getConnection();
@@ -143,7 +135,6 @@ public class TransactionDAO {
         }
     }
 
-    /** All-time revenue. */
     public double totalRevenue() {
         String sql = "SELECT COALESCE(SUM(amount), 0) FROM transactions";
         try (Connection connection = DatabaseConnection.getConnection();
@@ -155,7 +146,6 @@ public class TransactionDAO {
         }
     }
 
-    /** Number of payments recorded on a date — the "customers served" dashboard figure. */
     public int countForDate(LocalDate date) {
         String sql = "SELECT COUNT(*) FROM transactions WHERE DATE(transaction_date) = ?";
         try (Connection connection = DatabaseConnection.getConnection();

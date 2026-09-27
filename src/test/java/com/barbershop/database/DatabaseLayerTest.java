@@ -21,11 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/**
- * Exercises the real SQLite schema against a throwaway database file in {@code target/}.
- */
 class DatabaseLayerTest {
-
     private final CustomerDAO customerDAO = new CustomerDAO();
     private final BarberDAO barberDAO = new BarberDAO();
     private final ServiceDAO serviceDAO = new ServiceDAO();

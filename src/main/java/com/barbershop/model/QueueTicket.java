@@ -2,15 +2,7 @@ package com.barbershop.model;
 
 import java.time.LocalDateTime;
 
-/**
- * One walk-in customer waiting in line.
- *
- * <p>This is the element type stored in {@code dsa.MyQueue} on the Queue screen. A ticket holds
- * the customer together with the service they asked for and the barber who will serve them, so
- * that serving the front of the queue has everything needed to record the appointment.</p>
- */
 public class QueueTicket {
-
     private int ticketId;
     private Customer customer;
     private Service service;
@@ -90,7 +82,6 @@ public class QueueTicket {
         return service == null ? 0.0 : service.getPrice();
     }
 
-    /** Two tickets are the same when they hold the same customer. */
     @Override
     public boolean equals(Object o) {
         return o instanceof QueueTicket other && customer != null && customer.equals(other.customer);

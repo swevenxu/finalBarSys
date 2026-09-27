@@ -14,14 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Data access for the {@code appointments} table.
- *
- * <p>Appointment rows are read together with the customer, barber and service names so the
- * JavaFX tables can be populated without extra per-row queries.</p>
- */
 public class AppointmentDAO {
-
     private static final String SELECT_WITH_DETAILS = """
             SELECT a.appointment_id, a.customer_id, a.barber_id, a.service_id,
                    a.appointment_date, a.appointment_time, a.status,
@@ -39,7 +32,6 @@ public class AppointmentDAO {
         return queryList(SELECT_WITH_DETAILS + " ORDER BY a.appointment_date, a.appointment_time");
     }
 
-    /** Appointments on one date, earliest first. */
     public List<Appointment> findByDate(LocalDate date) {
         String sql = SELECT_WITH_DETAILS + " WHERE a.appointment_date = ? ORDER BY a.appointment_time";
         List<Appointment> results = new ArrayList<>();
@@ -57,7 +49,6 @@ public class AppointmentDAO {
         }
     }
 
-    /** A customer's appointment history, newest first — feeds the linked list on the Customers screen. */
     public List<Appointment> findByCustomer(int customerId) {
         String sql = SELECT_WITH_DETAILS
                 + " WHERE a.customer_id = ? ORDER BY a.appointment_date DESC, a.appointment_time DESC";
@@ -89,7 +80,6 @@ public class AppointmentDAO {
         }
     }
 
-    /** Inserts a booking and returns the generated id. */
     public int insert(Appointment appointment) {
         String sql = """
                 INSERT INTO appointments
@@ -142,7 +132,6 @@ public class AppointmentDAO {
         }
     }
 
-    /** Deletes the appointment and any payment recorded against it. */
     public boolean delete(int appointmentId) {
         try (Connection connection = DatabaseConnection.getConnection()) {
             connection.setAutoCommit(false);
@@ -169,7 +158,6 @@ public class AppointmentDAO {
         }
     }
 
-    /** Number of appointments on a given date. */
     public int countByDate(LocalDate date) {
         String sql = "SELECT COUNT(*) FROM appointments WHERE appointment_date = ?";
         try (Connection connection = DatabaseConnection.getConnection();
@@ -183,7 +171,6 @@ public class AppointmentDAO {
         }
     }
 
-    /** Number of appointments on a date with a specific status — powers the dashboard counters. */
     public int countByDateAndStatus(LocalDate date, String status) {
         String sql = "SELECT COUNT(*) FROM appointments WHERE appointment_date = ? AND status = ?";
         try (Connection connection = DatabaseConnection.getConnection();

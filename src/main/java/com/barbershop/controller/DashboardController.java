@@ -19,15 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.time.LocalDate;
 import java.util.List;
 
-/**
- * Dashboard: today's numbers, the next customer to serve and today's appointment list.
- *
- * <p>The "Next up" panel is DSA #2 in action — the day's pending appointments are pushed into a
- * hand-written {@link MyPriorityQueue} ordered by date and time, and the highest priority
- * appointment is peeked from the top of the heap.</p>
- */
 public class DashboardController implements Refreshable {
-
     @FXML
     private Label appointmentsValue;
 
@@ -103,10 +95,6 @@ public class DashboardController implements Refreshable {
         }
     }
 
-    /**
-     * Pushes every still-pending appointment into a custom priority queue and reads off the
-     * one at the top of the heap.
-     */
     private void updateNextUp(List<Appointment> todaysAppointments) {
         MyPriorityQueue<Appointment> pending = new MyPriorityQueue<>(Appointment.BY_DATE_TIME);
 
@@ -134,4 +122,3 @@ public class DashboardController implements Refreshable {
                 + " pending appointment(s), highest priority at the top.");
     }
 }
-

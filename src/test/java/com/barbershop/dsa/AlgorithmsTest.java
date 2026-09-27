@@ -13,9 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/** Tests for {@link SearchAlgorithms} and {@link SortAlgorithms}. */
 class AlgorithmsTest {
-
     @Test
     @DisplayName("merge sort orders integers and does not touch the input array")
     void mergeSortOrdersIntegers() {

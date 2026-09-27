@@ -14,11 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-/**
- * Service management: name, price and estimated duration.
- */
 public class ServiceController implements Refreshable {
-
     @FXML
     private TableView<Service> serviceTable;
 
@@ -53,7 +49,6 @@ public class ServiceController implements Refreshable {
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         durationColumn.setCellValueFactory(new PropertyValueFactory<>("durationMinutes"));
 
-        // Prices always render as ₱ with two decimals.
         priceColumn.setCellFactory(column -> new javafx.scene.control.TableCell<>() {
             @Override
             protected void updateItem(Double price, boolean empty) {

@@ -11,11 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Data access for the {@code barbers} table.
- */
 public class BarberDAO {
-
     public List<Barber> findAll() {
         String sql = "SELECT barber_id, name, specialization, status FROM barbers ORDER BY name COLLATE NOCASE";
         List<Barber> barbers = new ArrayList<>();
@@ -31,7 +27,6 @@ public class BarberDAO {
         }
     }
 
-    /** Only barbers whose status is {@code Available} — used by the Queue screen. */
     public List<Barber> findByStatus(String status) {
         String sql = "SELECT barber_id, name, specialization, status FROM barbers "
                 + "WHERE status = ? ORDER BY name COLLATE NOCASE";
@@ -98,7 +93,6 @@ public class BarberDAO {
         }
     }
 
-    /** Updates only the availability status, which the Queue screen changes as customers are served. */
     public boolean updateStatus(int barberId, String status) {
         String sql = "UPDATE barbers SET status = ? WHERE barber_id = ?";
         try (Connection connection = DatabaseConnection.getConnection();
