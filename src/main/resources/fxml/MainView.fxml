@@ -20,7 +20,7 @@
                 <Insets top="12" right="18" bottom="12" left="18"/>
             </padding>
             <Label text="&#9986;" styleClass="header-logo"/>
-            <Label text="BARBERSHOP MANAGEMENT SYSTEM" styleClass="app-title"/>
+            <Label text="FADE INTO YOU" styleClass="app-title"/>
             <Region HBox.hgrow="ALWAYS"/>
             <Label fx:id="userLabel" styleClass="header-user"/>
             <Button text="Sign out" onAction="#handleLogout" styleClass="ghost-button"/>

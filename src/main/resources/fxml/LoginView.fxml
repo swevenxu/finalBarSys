@@ -21,8 +21,8 @@
         </padding>
 
         <Label text="&#9986;" styleClass="login-logo"/>
-        <Label text="BARBERSHOP" styleClass="login-title"/>
-        <Label text="Appointment &amp; Queue Management System" styleClass="login-subtitle"/>
+        <Label text="FADE&#8202;INTO&#8202;YOU" styleClass="login-title"/>
+        <Label text="Appointment &amp; Queue Management" styleClass="login-subtitle"/>
 
         <Region prefHeight="16"/>
 

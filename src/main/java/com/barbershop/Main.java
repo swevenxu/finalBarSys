@@ -7,7 +7,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    public static final String APP_NAME = "Barbershop Management System";
+    public static final String APP_NAME = "FadeIntoYou";
 
     @Override
     public void start(Stage primaryStage) {

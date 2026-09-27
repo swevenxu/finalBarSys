@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 import java.util.Optional;
 
 public class LoginController {
-    private static final String TITLE = "Barbershop Management System";
+    private static final String TITLE = "FadeIntoYou";
 
     @FXML
     private TextField usernameField;

@@ -1,9 +1,9 @@
-# Barbershop Appointment and Queue Management System
+# FadeIntoYou
 
-A desktop app for managing a barbershop. Built with Java 21, JavaFX and SQLite.
-Made for a school project - the data structures and algorithms (queue, stack,
-linked list, priority queue, sorting, searching) are all written by hand, no
-java.util collections for those parts.
+A barbershop appointment and queue management desktop app. Built with Java 21,
+JavaFX and SQLite. Made for a school project - the data structures and algorithms
+(queue, stack, linked list, priority queue, sorting, searching) are all written
+by hand, no java.util collections for those parts.
 
 ## How to run
 

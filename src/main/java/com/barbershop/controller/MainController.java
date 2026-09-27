@@ -26,7 +26,7 @@ public class MainController {
         Scene scene = new Scene(root, 1180, 720);
         Stylesheets.apply(scene);
 
-        stage.setTitle("Barbershop Management System");
+        stage.setTitle("FadeIntoYou");
         stage.setScene(scene);
         stage.setResizable(true);
         stage.setMinWidth(950);
