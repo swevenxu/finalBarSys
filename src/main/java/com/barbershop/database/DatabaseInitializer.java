@@ -17,6 +17,7 @@ public final class DatabaseInitializer {
     public static void initialize() {
         createSchema();
         seedUsers();
+        seedServices();
     }
 
     public static void reset() {
@@ -127,6 +128,46 @@ public final class DatabaseInitializer {
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DataAccessException("Could not create the default login.", e);
+        }
+    }
+
+    private static void seedServices() {
+        if (countRows("services") > 0) {
+            return;
+        }
+        Object[][] services = {
+                {"Basic Haircut", 150.0, 30},
+                {"Fade Haircut", 200.0, 45},
+                {"Premium Haircut", 350.0, 45},
+                {"Student Haircut", 150.0, 30},
+                {"Kids Haircut", 150.0, 30},
+                {"Haircut + Shampoo", 300.0, 45},
+                {"Haircut + Beard Trim", 400.0, 60},
+                {"Beard Trim / Shape-up", 200.0, 15},
+                {"Full Beard Shave", 250.0, 20},
+                {"Hot Towel Shave", 300.0, 30},
+                {"Head Shave", 200.0, 30},
+                {"Haircut + Hot Towel", 350.0, 60},
+                {"Haircut + Facial", 500.0, 60},
+                {"Haircut + Beard + Facial", 600.0, 90},
+                {"Head & Shoulder Massage", 200.0, 15},
+                {"Scalp Treatment", 300.0, 15},
+                {"Hair Color", 500.0, 90},
+                {"Hair Color + Haircut", 700.0, 120},
+                {"Hair Perm", 1000.0, 180}
+        };
+        String sql = "INSERT INTO services (name, price, duration) VALUES (?, ?, ?)";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            for (Object[] service : services) {
+                statement.setString(1, (String) service[0]);
+                statement.setDouble(2, (Double) service[1]);
+                statement.setInt(3, (Integer) service[2]);
+                statement.addBatch();
+            }
+            statement.executeBatch();
+        } catch (SQLException e) {
+            throw new DataAccessException("Could not seed the services.", e);
         }
     }
 

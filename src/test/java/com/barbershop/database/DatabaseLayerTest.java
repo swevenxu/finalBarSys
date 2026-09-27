@@ -172,10 +172,13 @@ class DatabaseLayerTest {
     }
 
     @Test
-    @DisplayName("a fresh install starts clean: only the default admin login exists")
+    @DisplayName("a fresh install seeds the service menu and the default admin login only")
     void freshInstallStartsClean() {
+        assertEquals(19, serviceDAO.findAll().size(), "the service menu should be pre-seeded");
+        assertTrue(serviceDAO.findAll().stream().noneMatch(s -> s.getName().equals("Basic Haircut")
+                        && s.getPrice() != 150.0),
+                "seeded prices should match the price list");
         assertTrue(barberDAO.findAll().isEmpty(), "no barbers should be pre-seeded");
-        assertTrue(serviceDAO.findAll().isEmpty(), "no services should be pre-seeded");
         assertTrue(customerDAO.findAll().isEmpty(), "no customers should be pre-seeded");
         assertTrue(appointmentDAO.findByDate(LocalDate.now()).isEmpty(),
                 "no appointments should be pre-seeded");
