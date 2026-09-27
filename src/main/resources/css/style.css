@@ -260,6 +260,47 @@
     -fx-border-color: accent;
 }
 
+.combo-box .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: ink;
+    -fx-padding: 2 4 2 4;
+}
+
+.combo-box .list-cell:odd,
+.combo-box .list-cell:selected {
+    -fx-background-color: transparent;
+    -fx-text-fill: ink;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: surface;
+    -fx-background-radius: 6;
+    -fx-border-color: line;
+    -fx-border-radius: 6;
+    -fx-effect: dropshadow(gaussian, rgba(48, 56, 65, 0.25), 12, 0.1, 0, 4);
+}
+
+.combo-box-popup .list-cell {
+    -fx-background-color: surface;
+    -fx-text-fill: ink;
+    -fx-padding: 7 10 7 10;
+}
+
+.combo-box-popup .list-cell:odd {
+    -fx-background-color: surface;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #e9f2fb;
+    -fx-text-fill: ink;
+}
+
+.combo-box-popup .list-cell:selected {
+    -fx-background-color: accent;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
 /* --------------------------------------------------------------- tables --- */
 
 .table-view {
