@@ -1,6 +1,6 @@
 /* ==========================================================================
    FadeIntoYou — JavaFX stylesheet
-   Palette: charcoal sidebar, warm amber accent, light content area.
+   Palette: #303841, #47555e, #7aa5d2, #eeeeee.
    ========================================================================== */
 
 .root {
@@ -10,14 +10,14 @@
     -fx-font-size: 13px;
 
     /* Named colours reused throughout */
-    accent: #c8791f;
-    accent-dark: #a86313;
-    ink: #1f2833;
-    ink-soft: #3d4a5a;
-    muted: #7b8794;
+    accent: #7aa5d2;
+    accent-dark: #5b88b8;
+    ink: #303841;
+    ink-soft: #47555e;
+    muted: #6e7e8a;
     surface: #ffffff;
-    canvas: #f3f5f8;
-    line: #dde3ea;
+    canvas: #eeeeee;
+    line: #d9dde1;
     danger: #c0392b;
     success: #2e7d5b;
 }
@@ -25,7 +25,7 @@
 /* --------------------------------------------------------------- login ---- */
 
 .login-root {
-    -fx-background-color: linear-gradient(to bottom right, #1f2833, #2f3e4e);
+    -fx-background-color: linear-gradient(to bottom right, #303841, #47555e);
 }
 
 .login-card {
@@ -82,7 +82,7 @@
 }
 
 .sidebar {
-    -fx-background-color: #26313d;
+    -fx-background-color: #28323b;
 }
 
 .sidebar-heading {
@@ -102,12 +102,12 @@
 }
 
 .nav-button:hover {
-    -fx-background-color: #32404f;
+    -fx-background-color: #47555e;
     -fx-text-fill: #ffffff;
 }
 
 .nav-button:focused {
-    -fx-background-color: #3a4a5c;
+    -fx-background-color: #52646e;
     -fx-text-fill: #ffffff;
 }
 
@@ -151,7 +151,7 @@
     -fx-border-color: line;
     -fx-border-radius: 10;
     -fx-border-width: 1;
-    -fx-effect: dropshadow(gaussian, rgba(31, 40, 51, 0.06), 8, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(48, 56, 65, 0.08), 8, 0, 0, 2);
 }
 
 .stat-value {
@@ -176,9 +176,8 @@
     -fx-font-size: 12.5px;
 }
 
-/* Notes that explain which data structure or algorithm is in play. */
 .dsa-note {
-    -fx-text-fill: #6a7684;
+    -fx-text-fill: #6e7e8a;
     -fx-font-size: 11.5px;
     -fx-font-style: italic;
 }
@@ -299,7 +298,7 @@
 }
 
 .table-row-cell:selected {
-    -fx-background-color: #fdf1e2;
+    -fx-background-color: #e9f2fb;
     -fx-text-fill: ink;
 }
 
@@ -325,7 +324,7 @@
 }
 
 .list-cell:selected {
-    -fx-background-color: #fdf1e2;
+    -fx-background-color: #e9f2fb;
     -fx-text-fill: ink;
 }
 
@@ -342,7 +341,7 @@
 }
 
 .status-progress {
-    -fx-text-fill: #2c6bb3;
+    -fx-text-fill: #4a7ab5;
     -fx-font-weight: bold;
 }
 
