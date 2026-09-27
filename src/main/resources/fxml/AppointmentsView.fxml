@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.barbershop.controller.AppointmentController"
+      spacing="10" styleClass="screen">
+
+    <!-- Sorting controls: the project's own merge sort, not the JavaFX column sort -->
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <Label text="Sort by" styleClass="field-label"/>
+        <ComboBox fx:id="sortByCombo" prefWidth="180"/>
+        <Label text="Order" styleClass="field-label"/>
+        <ComboBox fx:id="sortOrderCombo" prefWidth="140"/>
+        <Button text="Apply sort" onAction="#handleSort" styleClass="primary-button"/>
+        <Button text="Show all" onAction="#handleClearFilter" styleClass="ghost-button"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="filterField" promptText="Filter by customer, barber or service..."
+                   prefWidth="300" onAction="#handleFilter"/>
+        <Button text="Filter" onAction="#handleFilter" styleClass="ghost-button"/>
+    </HBox>
+    <Label fx:id="sortInfoLabel" styleClass="dsa-note" wrapText="true"/>
+
+    <HBox spacing="12" VBox.vgrow="ALWAYS">
+        <VBox styleClass="panel" spacing="8" HBox.hgrow="ALWAYS">
+            <padding><Insets top="12" right="14" bottom="12" left="14"/></padding>
+            <Label text="APPOINTMENTS" styleClass="panel-heading"/>
+            <TableView fx:id="appointmentTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="dateColumn" text="Date" prefWidth="110"/>
+                    <TableColumn fx:id="timeColumn" text="Time" prefWidth="80"/>
+                    <TableColumn fx:id="customerColumn" text="Customer" prefWidth="160"/>
+                    <TableColumn fx:id="barberColumn" text="Barber" prefWidth="140"/>
+                    <TableColumn fx:id="serviceColumn" text="Service" prefWidth="150"/>
+                    <TableColumn fx:id="priceColumn" text="Price" prefWidth="90"/>
+                    <TableColumn fx:id="statusColumn" text="Status" prefWidth="110"/>
+                </columns>
+            </TableView>
+        </VBox>
+
+        <VBox styleClass="panel" spacing="6" prefWidth="300" maxWidth="300">
+            <padding><Insets top="12" right="14" bottom="12" left="14"/></padding>
+            <Label fx:id="formTitle" text="BOOK APPOINTMENT" styleClass="panel-heading"/>
+            <Label text="Customer" styleClass="field-label"/>
+            <ComboBox fx:id="customerCombo" maxWidth="Infinity" promptText="Select a customer"/>
+            <Label text="Barber" styleClass="field-label"/>
+            <ComboBox fx:id="barberCombo" maxWidth="Infinity" promptText="Select a barber"/>
+            <Label text="Service" styleClass="field-label"/>
+            <ComboBox fx:id="serviceCombo" maxWidth="Infinity" promptText="Select a service"/>
+            <Label text="Date" styleClass="field-label"/>
+            <DatePicker fx:id="datePicker" maxWidth="Infinity"/>
+            <Label text="Time (24-hour, HH:mm)" styleClass="field-label"/>
+            <TextField fx:id="timeField" promptText="10:30"/>
+            <Label text="Status" styleClass="field-label"/>
+            <ComboBox fx:id="statusCombo" maxWidth="Infinity"/>
+            <Region prefHeight="6"/>
+            <Button text="Save appointment" onAction="#handleSave" maxWidth="Infinity" styleClass="primary-button"/>
+            <Button text="Clear form" onAction="#handleClearForm" maxWidth="Infinity" styleClass="ghost-button"/>
+            <Button text="Cancel appointment" onAction="#handleCancelAppointment" maxWidth="Infinity" styleClass="ghost-button"/>
+            <Button text="Delete appointment" onAction="#handleDelete" maxWidth="Infinity" styleClass="danger-button"/>
+        </VBox>
+    </HBox>
+</VBox>

@@ -1,0 +1,26 @@
+# Maven
+target/
+dependency-reduced-pom.xml
+
+# SQLite database (created at runtime)
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# Codebuff workspace
+.freebuff/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

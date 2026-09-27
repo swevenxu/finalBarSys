@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.barbershop.controller.ServiceController"
+      spacing="10" styleClass="screen">
+
+    <Label text="Services offered by the shop, together with the price charged and the estimated duration."
+           styleClass="dsa-note" wrapText="true"/>
+
+    <HBox spacing="12" VBox.vgrow="ALWAYS">
+        <VBox styleClass="panel" spacing="8" HBox.hgrow="ALWAYS">
+            <padding><Insets top="12" right="14" bottom="12" left="14"/></padding>
+            <Label text="SERVICES" styleClass="panel-heading"/>
+            <TableView fx:id="serviceTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="nameColumn" text="Service" prefWidth="280"/>
+                    <TableColumn fx:id="priceColumn" text="Price" prefWidth="130"/>
+                    <TableColumn fx:id="durationColumn" text="Duration (min)" prefWidth="130"/>
+                </columns>
+            </TableView>
+        </VBox>
+
+        <VBox styleClass="panel" spacing="6" prefWidth="300" maxWidth="300">
+            <padding><Insets top="12" right="14" bottom="12" left="14"/></padding>
+            <Label fx:id="formTitle" text="NEW SERVICE" styleClass="panel-heading"/>
+            <Label text="Service name" styleClass="field-label"/>
+            <TextField fx:id="nameField" promptText="Haircut"/>
+            <Label text="Price (&#8369;)" styleClass="field-label"/>
+            <TextField fx:id="priceField" promptText="150"/>
+            <Label text="Estimated duration (minutes)" styleClass="field-label"/>
+            <TextField fx:id="durationField" promptText="30"/>
+            <Region prefHeight="6"/>
+            <Button text="Save service" onAction="#handleSave" maxWidth="Infinity" styleClass="primary-button"/>
+            <Button text="Clear form" onAction="#handleClearForm" maxWidth="Infinity" styleClass="ghost-button"/>
+            <Button text="Delete service" onAction="#handleDelete" maxWidth="Infinity" styleClass="danger-button"/>
+        </VBox>
+    </HBox>
+</VBox>

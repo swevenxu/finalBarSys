@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.barbershop.controller.TransactionController"
+      spacing="10" styleClass="screen">
+
+    <Label text="Completed payments. The panel on the right is a LIFO stack — the most recent payment sits on top and can be undone."
+           styleClass="dsa-note" wrapText="true"/>
+
+    <!-- Totals -->
+    <HBox spacing="12">
+        <VBox styleClass="stat-card" spacing="2" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+            <padding><Insets top="14" right="16" bottom="14" left="16"/></padding>
+            <Label fx:id="totalRevenueValue" text="&#8369;0.00" styleClass="stat-value"/>
+            <Label text="Total Revenue (all time)" styleClass="stat-caption"/>
+        </VBox>
+        <VBox styleClass="stat-card" spacing="2" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+            <padding><Insets top="14" right="16" bottom="14" left="16"/></padding>
+            <Label fx:id="todayRevenueValue" text="&#8369;0.00" styleClass="stat-value"/>
+            <Label text="Today's Revenue" styleClass="stat-caption"/>
+        </VBox>
+        <VBox styleClass="stat-card" spacing="2" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+            <padding><Insets top="14" right="16" bottom="14" left="16"/></padding>
+            <Label fx:id="countValue" text="0" styleClass="stat-value"/>
+            <Label text="Payments Recorded" styleClass="stat-caption"/>
+        </VBox>
+    </HBox>
+
+    <!-- Actions -->
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <Button text="Record payment for a completed appointment" onAction="#handleRecordPayment"
+                styleClass="primary-button"/>
+        <Button text="Refresh" onAction="#handleRefresh" styleClass="ghost-button"/>
+    </HBox>
+
+    <HBox spacing="12" VBox.vgrow="ALWAYS">
+        <VBox styleClass="panel" spacing="8" HBox.hgrow="ALWAYS">
+            <padding><Insets top="12" right="14" bottom="12" left="14"/></padding>
+            <Label text="TRANSACTION HISTORY" styleClass="panel-heading"/>
+            <TableView fx:id="transactionTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="dateColumn" text="Date" prefWidth="160"/>
+                    <TableColumn fx:id="customerColumn" text="Customer" prefWidth="180"/>
+                    <TableColumn fx:id="serviceColumn" text="Service" prefWidth="170"/>
+                    <TableColumn fx:id="amountColumn" text="Amount" prefWidth="110"/>
+                    <TableColumn fx:id="methodColumn" text="Payment" prefWidth="110"/>
+                </columns>
+            </TableView>
+        </VBox>
+
+        <VBox styleClass="panel" spacing="8" prefWidth="330" maxWidth="330">
+            <padding><Insets top="12" right="14" bottom="12" left="14"/></padding>
+            <Label text="RECENT TRANSACTIONS (STACK)" styleClass="panel-heading"/>
+            <ListView fx:id="recentList" VBox.vgrow="ALWAYS" prefHeight="220"/>
+            <Label fx:id="stackNote" styleClass="dsa-note" wrapText="true"/>
+            <Button text="Undo last payment" onAction="#handleUndo" maxWidth="Infinity"
+                    styleClass="danger-button"/>
+        </VBox>
+    </HBox>
+</VBox>

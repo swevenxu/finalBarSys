@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.barbershop.controller.DashboardController"
+      spacing="14" styleClass="screen">
+
+    <!-- Statistic cards -->
+    <HBox spacing="12">
+        <VBox styleClass="stat-card" spacing="2" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+            <padding><Insets top="14" right="16" bottom="14" left="16"/></padding>
+            <Label fx:id="appointmentsValue" text="0" styleClass="stat-value"/>
+            <Label text="Today's Appointments" styleClass="stat-caption"/>
+        </VBox>
+        <VBox styleClass="stat-card" spacing="2" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+            <padding><Insets top="14" right="16" bottom="14" left="16"/></padding>
+            <Label fx:id="servedValue" text="0" styleClass="stat-value"/>
+            <Label text="Customers Served" styleClass="stat-caption"/>
+        </VBox>
+        <VBox styleClass="stat-card" spacing="2" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+            <padding><Insets top="14" right="16" bottom="14" left="16"/></padding>
+            <Label fx:id="waitingValue" text="0" styleClass="stat-value"/>
+            <Label text="Waiting Customers" styleClass="stat-caption"/>
+        </VBox>
+        <VBox styleClass="stat-card" spacing="2" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+            <padding><Insets top="14" right="16" bottom="14" left="16"/></padding>
+            <Label fx:id="revenueValue" text="&#8369;0.00" styleClass="stat-value"/>
+            <Label text="Today's Revenue" styleClass="stat-caption"/>
+        </VBox>
+    </HBox>
+
+    <!-- Next up: served by the custom priority queue -->
+    <VBox styleClass="panel" spacing="4">
+        <padding><Insets top="14" right="16" bottom="14" left="16"/></padding>
+        <Label text="NEXT UP" styleClass="panel-heading"/>
+        <Label fx:id="nextUpCustomer" text="No more appointments today." styleClass="nextup-value"/>
+        <Label fx:id="nextUpDetails" text="" styleClass="muted-label"/>
+        <Label fx:id="nextUpNote" text="" styleClass="dsa-note" wrapText="true"/>
+    </VBox>
+
+    <!-- Today's appointments -->
+    <VBox styleClass="panel" VBox.vgrow="ALWAYS" spacing="8">
+        <padding><Insets top="14" right="16" bottom="14" left="16"/></padding>
+        <Label text="TODAY'S APPOINTMENTS" styleClass="panel-heading"/>
+        <TableView fx:id="todayTable" VBox.vgrow="ALWAYS" prefHeight="260">
+            <columns>
+                <TableColumn fx:id="timeColumn" text="Time" prefWidth="90"/>
+                <TableColumn fx:id="customerColumn" text="Customer" prefWidth="220"/>
+                <TableColumn fx:id="barberColumn" text="Barber" prefWidth="180"/>
+                <TableColumn fx:id="serviceColumn" text="Service" prefWidth="200"/>
+                <TableColumn fx:id="statusColumn" text="Status" prefWidth="130"/>
+            </columns>
+        </TableView>
+    </VBox>
+</VBox>
